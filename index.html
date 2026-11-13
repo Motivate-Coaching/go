@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>The Living Room</title>
+<noscript><meta http-equiv="refresh" content="0;url=https://the-living-room.com/?utm_source=outreach&utm_medium=email&utm_campaign=nov26"></noscript>
+<style>
+  :root{color-scheme:light dark}
+  html,body{height:100%;margin:0}
+  body{display:flex;align-items:center;justify-content:center;font-family:Poppins,Arial,Helvetica,sans-serif;background:#faf7f1;color:#2b2b2b}
+  @media (prefers-color-scheme:dark){body{background:#151515;color:#eee}}
+  p{font-size:15px;opacity:.7}
+</style>
+</head>
+<body>
+<p>Taking you to The Living Room…</p>
+<script>
+(function () {
+  var DEST = "https://the-living-room.com/";
+  var UTM = "?utm_source=outreach&utm_medium=email&utm_campaign=nov26";
+  var API = "https://tsusrzkpzevpiuvsppls.supabase.co/rest/v1/rpc/outreach_click";
+  var KEY = "sb_publishable_CihTn2LdYzTtjbUQTAGA3g_jpNUMq1q";
+  var done = false;
+  function go(url) {
+    if (done) return; done = true;
+    window.location.replace((url || DEST).split("?")[0] + UTM);
+  }
+  // Code comes from the path (/abc12345) or ?c=abc12345
+  var code = (location.pathname.replace(/^\/+|\/+$/g, "") || new URLSearchParams(location.search).get("c") || "")
+    .replace(/[^a-z0-9]/gi, "").slice(0, 16);
+  if (!code) { go(); return; }
+  setTimeout(function () { go(); }, 1500); // never leave anyone waiting
+  try {
+    fetch(API, {
+      method: "POST", keepalive: true,
+      headers: { "apikey": KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_code: code })
+    }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { go(typeof d === "string" ? d : null); })
+      .catch(function () { go(); });
+  } catch (e) { go(); }
+})();
+</script>
+</body>
+</html>
